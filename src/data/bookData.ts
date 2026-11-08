@@ -1,5 +1,40 @@
-// Where the "Buy on Nestuge" buttons send people.
-export const NESTUGE_URL = 'https://nestuge.com/vwl0vk3tr';
+export interface Store {
+  id: string;
+  name: string;
+  summary: string;
+  url: string;
+  // Leave empty to show the store without a price.
+  prices: { label: string; price: string }[];
+}
+
+// The "Where to buy" list. Edit prices and links here.
+export const STORES: Store[] = [
+  {
+    id: 'selar',
+    name: 'Selar',
+    summary: 'Digital edition. Pay in naira.',
+    url: 'https://selar.com/632y99396g',
+    prices: [{ label: 'Digital', price: '₦25,000' }],
+  },
+  {
+    id: 'amazon',
+    name: 'Amazon',
+    summary: 'Kindle, paperback and hardcover. The link opens the book page, where you can pick a format.',
+    url: 'https://www.amazon.com/dp/B0GYQ7P2BH',
+    prices: [
+      { label: 'Kindle', price: '$8.99' },
+      { label: 'Paperback', price: '$23.99' },
+      { label: 'Hardcover', price: '$30.99' },
+    ],
+  },
+  {
+    id: 'nestuge',
+    name: 'Nestuge',
+    summary: 'Digital edition.',
+    url: 'https://nestuge.com/vwl0vk3tr',
+    prices: [],
+  },
+];
 
 // Optional: path or URL of the real book cover image (e.g. '/cover.jpg' after
 // adding the file to /public). When empty, a simple drawn cover is shown.
@@ -13,7 +48,6 @@ export const BOOK = {
   author: 'Uweh Bariduanen',
   authorRole: 'Data analyst and professional Excel trainer',
   authorOrg: 'Indorama Eleme Fertilizers & Chemicals · Training Director at Data Edge Academy',
-  price: '₦25,000',
   isbn: '9798259116948',
   edition: 'First edition, July 2026',
   pages: 196,
