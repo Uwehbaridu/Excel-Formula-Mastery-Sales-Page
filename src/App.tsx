@@ -1,16 +1,14 @@
 import React from 'react';
-import { BOOK, CHAPTERS, NESTUGE_URL } from './data/bookData.ts';
+import { BOOK, CHAPTERS, STORES } from './data/bookData.ts';
 import { BookCover } from './components/BookCover.tsx';
 import { FormulaSheet } from './components/FormulaSheet.tsx';
 
 const BuyButton: React.FC<{ className?: string }> = ({ className = '' }) => (
   <a
-    href={NESTUGE_URL}
-    target="_blank"
-    rel="noopener noreferrer"
+    href="#buy"
     className={`inline-flex items-center justify-center rounded-md bg-ledger px-6 py-3 text-base font-semibold text-white hover:bg-ledger-dark transition-colors ${className}`}
   >
-    Buy on Nestuge
+    See where to buy
   </a>
 );
 
@@ -21,12 +19,10 @@ export default function App() {
         <div className="mx-auto max-w-5xl px-5 sm:px-8 h-14 flex items-center justify-between">
           <span className="font-semibold">{BOOK.title}</span>
           <a
-            href={NESTUGE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#buy"
             className="text-sm font-semibold text-ledger hover:text-ledger-dark underline underline-offset-4"
           >
-            Buy on Nestuge
+            Where to buy
           </a>
         </div>
       </header>
@@ -42,11 +38,12 @@ export default function App() {
               <p className="mt-5 text-lg text-muted leading-relaxed max-w-xl">{BOOK.subtitle}</p>
               <p className="mt-2 text-base text-muted">By {BOOK.author}</p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <div className="mt-8">
                 <BuyButton />
-                <p className="text-2xl font-semibold">{BOOK.price}</p>
               </div>
-              <p className="mt-3 text-sm text-muted">PDF ebook. Checkout and delivery are handled by Nestuge.</p>
+              <p className="mt-3 text-sm text-muted">
+                Available on Selar, Amazon and Nestuge. Digital from ₦25,000 or $8.99.
+              </p>
             </div>
 
             <div className="justify-self-start md:justify-self-end pr-2 pb-2">
@@ -63,6 +60,48 @@ export default function App() {
               </div>
             ))}
           </dl>
+        </section>
+
+        {/* Where to buy */}
+        <section id="buy" className="border-t border-grid bg-sheet scroll-mt-4">
+          <div className="mx-auto max-w-5xl px-5 sm:px-8 py-16">
+            <h2 className="text-3xl font-extrabold tracking-tight">Where to buy</h2>
+            <p className="mt-3 text-muted max-w-xl leading-relaxed">
+              Pick the store you prefer. Payment and delivery happen on that store&apos;s site.
+            </p>
+
+            <ul className="mt-10 border-t border-grid">
+              {STORES.map((store) => (
+                <li
+                  key={store.id}
+                  className="grid gap-4 py-6 border-b border-grid sm:grid-cols-[10rem_1fr_auto] sm:items-center sm:gap-8"
+                >
+                  <h3 className="text-xl font-semibold">{store.name}</h3>
+                  <div>
+                    <p className="text-muted max-w-md leading-relaxed">{store.summary}</p>
+                    {store.prices.length > 0 && (
+                      <dl className="mt-2 flex flex-wrap gap-x-6 gap-y-1">
+                        {store.prices.map((p) => (
+                          <div key={p.label} className="flex gap-2 items-baseline">
+                            <dt className="text-sm text-muted">{p.label}</dt>
+                            <dd className="font-semibold">{p.price}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    )}
+                  </div>
+                  <a
+                    href={store.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-md bg-ledger px-5 py-2.5 font-semibold text-white hover:bg-ledger-dark transition-colors"
+                  >
+                    Buy on {store.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         {/* One formula, shown as a worksheet */}
@@ -129,9 +168,7 @@ export default function App() {
           <div className="mx-auto max-w-5xl px-5 sm:px-8 py-16 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
             <div>
               <h2 className="text-3xl font-extrabold tracking-tight">Get Excel Formula Mastery {BOOK.year}</h2>
-              <p className="mt-2 text-muted">
-                {BOOK.price} · {BOOK.pages}-page PDF
-              </p>
+              <p className="mt-2 text-muted">{BOOK.pages} pages. Available on Selar, Amazon and Nestuge.</p>
             </div>
             <BuyButton />
           </div>
