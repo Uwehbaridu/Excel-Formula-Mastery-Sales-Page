@@ -1,6 +1,5 @@
-// Where the "Buy" buttons send people. Paste your Nestuge product link here.
-// While this is "#", the buttons do nothing.
-export const NESTUGE_URL = '#';
+// Where the "Buy on Nestuge" buttons send people.
+export const NESTUGE_URL = 'https://nestuge.com/vwl0vk3tr';
 
 // Optional: path or URL of the real book cover image (e.g. '/cover.jpg' after
 // adding the file to /public). When empty, a simple drawn cover is shown.
